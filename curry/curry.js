@@ -1,18 +1,15 @@
-
 // nodemon curry.js --exec "../node_modules/mocha/bin/mocha test.js"
 
 function curry(fn) {
-  function wrapper(arr) {
+  return (function wrapper(arr) {
     return function curried() {
-      var tmp = arr.concat(Array.prototype.slice.call(arguments));
-      if (tmp.length === fn.length) {
-        return fn.apply(null, tmp);
+      var totalArguments = arr.concat(Array.prototype.slice.call(arguments));
+      if (totalArguments.length === fn.length) {
+        return fn.apply(null, totalArguments);
       }
-      return wrapper(tmp);
+      return wrapper(totalArguments);
     };
-  }
-
-  return wrapper([]);
+  }([]));
 }
 
 module.exports = curry;

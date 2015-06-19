@@ -13,7 +13,7 @@ describe('memoize', function() {
     fib(10);
     assert.equal(called, 11);
   });
-
+  
   it('can handle multiple arguments', function() {
     var called = 0;
     var fib = memoize(function(n, unused) {
