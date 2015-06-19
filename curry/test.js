@@ -1,5 +1,5 @@
 var assert = require('assert');
-var curry = require('./');
+var curry = require('./curry');
 
 describe('curry', function() {
 
@@ -9,28 +9,28 @@ describe('curry', function() {
     });
     assert.equal(add(1)(2), 3);
   });
-
+  //
   it('curries the function even with a single argument', function() {
     var output = curry(function(n) {
       return n;
     });
     assert.equal(output(1), 1);
   });
-
+  //
   it('curries the function until the arguments needed are given at least once', function() {
     var add = curry(function(a, b, c) {
       return a + b + c;
     });
     assert.equal(add(1, 2)(3), 6);
   });
-
+  //
   it('curries the function until the arguments needed are given mutliple times', function() {
     var add = curry(function(a, b, c) {
       return a + b + c;
     });
     assert.equal(add(1)(2)(3), 6);
   });
-
+  //
   it("doesn't share state between calls", function() {
     var add = curry(function(a, b, c) {
       return a + b + c;
@@ -38,7 +38,7 @@ describe('curry', function() {
     assert.equal(add(1)(2)(3), 6);
     assert.equal(add(2)(3)(4), 9);
   });
-  
+
   it("doesn't only work with addition", function() {
     var merge = curry(function(a, b, c) {
       return [a, b, c].join(', ');
