@@ -16,7 +16,7 @@ Middleware.prototype.go = function (fn) {
 		return function wrapper() {
 			var currentCb = currentCallbacks.shift();
 			if (typeof currentCb !== 'function') {
-				lastThing.call(self);
+				return lastThing.call(self);
 			}
 			function currentDone() {
 				return wrapper(currentCallbacks);
