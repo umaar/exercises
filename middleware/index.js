@@ -9,21 +9,21 @@ Middleware.prototype.use = function (fn) {
 };
 
 Middleware.prototype.go = function (fn) {
-	function wrapper(currentCallbacks, lastThing) {
+	function wrapper(currentCallbacks, completeCallback) {
 		var currentCb = currentCallbacks.shift();
+
 		if (typeof currentCb !== 'function') {
-			return lastThing.call(this);
+			return completeCallback.call(this);
 		}
-		function currentDone() {
-			return wrapper.call(this, currentCallbacks, lastThing);
-		}
-		return currentCb.call(this, currentDone.bind(this));
+
+		return currentCb.call(this, function() {
+			return wrapper.call(this, currentCallbacks, completeCallback);
+		}.bind(this));
 	}
 
 	wrapper.call(this.middlewareContext, this.callbacks, function() {
 		fn.call(this);
 	});
-
 };
 
 module.exports = Middleware;
