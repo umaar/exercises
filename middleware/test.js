@@ -32,7 +32,7 @@ describe('middleware', function() {
 
 
 
-  
+
   it('works with multiple instances', function(done) {
 
     var middleware1 = new Middleware();

@@ -1,7 +1,7 @@
 
 function Middleware() {
 	this.callbacks = [];
-	this.context = {};
+	this.middlewareContext = {};
 }
 
 Middleware.prototype.use = function (fn) {
@@ -9,20 +9,18 @@ Middleware.prototype.use = function (fn) {
 };
 
 Middleware.prototype.go = function (fn) {
-	var self = this.context;
-
 	function wrapper(currentCallbacks, lastThing) {
 		var currentCb = currentCallbacks.shift();
 		if (typeof currentCb !== 'function') {
-			return lastThing.call(self);
+			return lastThing.call(this);
 		}
 		function currentDone() {
-			return wrapper(currentCallbacks, lastThing);
+			return wrapper.call(this, currentCallbacks, lastThing);
 		}
-		return currentCb.call(self, currentDone);
+		return currentCb.call(this, currentDone.bind(this));
 	}
 
-	wrapper(this.callbacks, function() {
+	wrapper.call(this.middlewareContext, this.callbacks, function() {
 		fn.call(this);
 	});
 
