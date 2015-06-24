@@ -1,0 +1,8 @@
+
+{
+  "stage": 0,
+  "loose": ["all"],
+  "ignore": [
+    "node_modules/"
+  ]
+}
