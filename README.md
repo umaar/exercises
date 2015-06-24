@@ -25,3 +25,8 @@ Pull requests welcome, please follow the basic workflow:
 
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-url]: https://gitter.im/kolodny/exercises
+
+
+```
+nodemon --exec "../node_modules/mocha/bin/mocha --compilers js:babel/register"
+```
