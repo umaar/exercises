@@ -1,12 +1,14 @@
 
-function Middleware() {
-	this.callbacks = [];
-	this.middlewareContext = {};
-}
+class Middleware {
+	constructor() {
+		this.callbacks = [];
+		this.middlewareContext = {};
+	}
 
-Middleware.prototype.use = function (fn) {
-	this.callbacks.push(fn);
-};
+	use (fn) {
+		this.callbacks.push(fn);
+	}
+}
 
 Middleware.prototype.go = function (fn) {
 	function wrapper(currentCallbacks, completeCallback) {
@@ -26,4 +28,4 @@ Middleware.prototype.go = function (fn) {
 	});
 };
 
-module.exports = Middleware;
+export default Middleware;
