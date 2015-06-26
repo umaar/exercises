@@ -1,18 +1,16 @@
 
 function memoize(fn) {
-	var cache = {};
+	let cache = {};
 
-	return function() {
-		var answer;
-		var arg = Array.prototype.slice.call(arguments);
-		if (cache[arg]) {
-			answer = cache[arg];
-			return answer;
+	return (...args) => {
+		let answer;
+		if (cache[args]) {
+			answer = cache[args];
 		} else {
-			answer = fn.apply(null, arg);
-			cache[arg] = answer;
-			return answer;
+			answer = fn.apply(null, args);
+			cache[args] = answer;
 		}
+		return answer;
 	};
 }
 
