@@ -1,12 +1,12 @@
 
-function* flat(arr) {
+function* flatten(arr) {
 	for (let i of arr) {
 		if (Array.isArray(i)) {
-			yield *flat(i);
+			yield *flatten(i);
 		} else {
 			yield i;
 		}
 	}
 }
 
-module.exports = (arr) => [for (i of flat(arr)) i ];
+module.exports = (arr) => Array.from(flatten(arr)) ;

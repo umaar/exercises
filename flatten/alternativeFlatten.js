@@ -10,3 +10,8 @@ function alternativeFlatten(arr, rolling = []) {
 }
 
 module.exports = alternativeFlatten;
+
+/*
+* Note: if using generators, could also do:
+* module.exports = (arr) => [for (i of flatten(arr)) i ];
+*/
