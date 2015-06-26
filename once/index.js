@@ -4,14 +4,12 @@ function once(fn) {
 	let returnVal;
 
 	return function(...args) {
-		let self = this;
 		if (hasExecuted === true) {
 			return returnVal;
 		}
 
 		hasExecuted = true;
-		returnVal = fn.call(this, ...args);
-		return returnVal;
+		return returnVal = fn.apply(this, args);
 	};
 }
 
